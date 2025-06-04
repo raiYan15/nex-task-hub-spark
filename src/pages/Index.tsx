@@ -1,6 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
-import { Search, Plus, Bell, Moon, Sun, Download, Sparkles } from 'lucide-react';
+import { Search, Plus, Bell, Moon, Sun, Download, Sparkles, Calendar } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import TaskForm from '../components/TaskForm';
 import TaskList from '../components/TaskList';
 import FilterButtons from '../components/FilterButtons';
@@ -9,6 +9,7 @@ import TypewriterTitle from '../components/TypewriterTitle';
 import MotivationalQuote from '../components/MotivationalQuote';
 import NotificationBell from '../components/NotificationBell';
 import ConfettiEffect from '../components/ConfettiEffect';
+import AlarmSystem from '../components/AlarmSystem';
 import { Task, TaskFilter, TaskSort } from '../types/Task';
 import { useToast } from '@/hooks/use-toast';
 
@@ -164,6 +165,9 @@ const Index = () => {
       {/* Confetti Effect */}
       {showConfetti && <ConfettiEffect />}
 
+      {/* Alarm System */}
+      <AlarmSystem tasks={tasks} darkMode={darkMode} />
+
       <div className="relative z-10 container mx-auto px-4 py-8 max-w-6xl">
         {/* Header */}
         <header className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 gap-4">
@@ -173,6 +177,18 @@ const Index = () => {
           </div>
           
           <div className="flex items-center gap-4">
+            <Link
+              to="/milestones"
+              className={`p-3 rounded-2xl backdrop-blur-lg transition-all duration-300 hover:scale-110 ${
+                darkMode 
+                  ? 'bg-white/10 hover:bg-white/20 text-white' 
+                  : 'bg-white/30 hover:bg-white/50 text-gray-800'
+              }`}
+              title="Daily Milestones"
+            >
+              <Calendar size={20} />
+            </Link>
+            
             <NotificationBell count={pendingTasksCount} darkMode={darkMode} />
             
             <button
